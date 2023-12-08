@@ -1,0 +1,53 @@
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>  <!-- interactive UI-->
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>  <!-- body에 element 두는 역할-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+    function App(){
+        const [amount, setAmount] = React.useState(0);
+        const [invert, setInvert] = React.useState(false);
+        const onChange = (event) =>{
+            setAmount(event.target.value);
+        }
+        const reset = () => setAmount(0);
+        const onFlip = () => {
+            reset();
+            setInvert((currFlipped) => !currFlipped)
+        };
+        return(
+            <div>
+                <h1>Super Converter</h1>
+                <div>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input 
+                        value={invert ? amount*60 : amount} 
+                        id="minutes" 
+                        placeholder="Minutes" 
+                        type="number" 
+                        onChange={onChange} 
+                        disabled={invert}/>
+                    <h4>You want convert to {amount}</h4>
+                </div>
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input 
+                        value={invert ? amount : Math.round(amount/60)} 
+                        id="hours" 
+                        placeholder="Hours" 
+                        type="number" 
+                        onChange={onChange} 
+                        disabled={!invert}/>
+
+
+                </div>
+                <button onClick={reset}>reset</button>
+                <button onClick={onFlip}>{invert ? "Turn back" : "Invert"}</button>
+            </div>
+        )
+    }
+    ReactDOM.render(<App/>, root);
+</script>
+</html>

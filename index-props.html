@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>  <!-- interactive UI-->
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>  <!-- body에 element 두는 역할-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+    function Btn({banana, x}){    // 인자는 props 딱 하나만 받음, 직접적으로 인자명을 {}안에서 바로 받아서 쓸수있음
+        return <button 
+                style={{
+                backgroundColor:"tomato",
+                color:"white",
+                padding:"10px 20px",
+                border: 0,
+                borderRadius: 10
+        }}>{banana + x}</button>
+    }
+    function App(){
+        const [index, setIndex] = React.useState("-1");
+        return(
+            <div>
+                <Btn banana="Save Changes" x="33" />
+                <Btn banana="Continue" />
+            </div>
+        )
+    }
+    ReactDOM.render(<App/>, root);
+</script>
+</html>
